@@ -18,4 +18,4 @@ RUN npx tsc-alias -p tsconfig.json || true
 
 EXPOSE 3000
 
-CMD npx prisma migrate deploy && node dist/main.js
+CMD npx prisma db push --skip-generate && node dist/main.js
