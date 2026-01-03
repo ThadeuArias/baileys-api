@@ -7,7 +7,7 @@ WORKDIR /app
 COPY package*.json ./
 
 RUN npm install --quiet
-RUN npm install -g tsc-alias
+RUN npm install tsc-alias --save-dev
 
 COPY . .
 
