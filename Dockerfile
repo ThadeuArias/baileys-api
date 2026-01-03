@@ -1,18 +1,19 @@
-FROM node:20-alpine AS builder
+FROM node:20-slim
+
+RUN apt-get update && apt-get install -y openssl git && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-COPY package*.json .
-
-# Install git
-RUN apk add --no-cache git
+COPY package*.json ./
 
 RUN npm install --quiet
 
-RUN npx prisma migrate
-
 COPY . .
+
+RUN npx prisma generate
+
+RUN npm run build
 
 EXPOSE 3000
 
-CMD [ "npm", "run", "dev" ]
+CMD ["npm", "start"]
