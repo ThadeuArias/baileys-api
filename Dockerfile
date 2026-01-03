@@ -18,4 +18,4 @@ RUN npx tsc-alias -p tsconfig.json || true
 
 EXPOSE 3000
 
-CMD ["node", "dist/main.js"]
+CMD npx prisma migrate deploy && node dist/main.js
